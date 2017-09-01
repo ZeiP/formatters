@@ -1,4 +1,5 @@
 import codecs
+import datetime
 
 class ReferenceTransferLine(object):
 
@@ -24,6 +25,28 @@ class ReferenceTransferLine(object):
         self.currency_code = '1'
         self.event_type = '0'
 
+    @property
+    def booking_date(self):
+        return self.__booking_date.strftime('%y%m%d')
+
+    @booking_date.setter
+    def booking_date(self, x):
+        if not isinstance(x, datetime.date):
+            return False
+        else:
+            self.__booking_date = x
+
+    @property
+    def payment_date(self):
+        return self.__payment_date.strftime('%y%m%d')
+
+    @payment_date.setter
+    def payment_date(self, x):
+        if not isinstance(x, datetime.date):
+            return False
+        else:
+            self.__payment_date = x
+
     def __str__(self):
         cont = []
         for field_name, opt in self.fields:
@@ -36,8 +59,8 @@ class ReferenceTransferLine(object):
 if __name__ == "__main__":
     line = ReferenceTransferLine()
     line.account_no = '112233987654321'
-    line.booking_date = '170901'
-    line.payment_date = '170901'
+    line.booking_date = datetime.date.today()
+    line.payment_date = datetime.date.today()
     line.archive_id = 'asdfasdfasdfasdf'
     line.reference_no = '5555'
     line.payer = 'ESIMERKKI ESSI'
