@@ -50,6 +50,8 @@ class ReferenceTransferLine(object):
     def __str__(self):
         cont = []
         for field_name, opt in self.fields:
+            if opt['required'] and not getattr(self, field_name):
+                return False
             if opt['just'] == 'l':
                 cont.append(getattr(self, field_name).ljust(opt['width'], opt['filler'])[:opt['width']])
             elif opt['just'] == 'r':
